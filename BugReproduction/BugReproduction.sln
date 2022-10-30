@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugReproduction", "BugReproduction.csproj", "{2D1CE6BC-1BD8-4D8C-B4AC-E0549BF3FDFB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Local|Any CPU = Local|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2D1CE6BC-1BD8-4D8C-B4AC-E0549BF3FDFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D1CE6BC-1BD8-4D8C-B4AC-E0549BF3FDFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D1CE6BC-1BD8-4D8C-B4AC-E0549BF3FDFB}.Local|Any CPU.ActiveCfg = Local|Any CPU
+		{2D1CE6BC-1BD8-4D8C-B4AC-E0549BF3FDFB}.Local|Any CPU.Build.0 = Local|Any CPU
+		{2D1CE6BC-1BD8-4D8C-B4AC-E0549BF3FDFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D1CE6BC-1BD8-4D8C-B4AC-E0549BF3FDFB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {49B0CCD3-14F0-4018-8AB8-64B823EAB939}
+	EndGlobalSection
+EndGlobal
