@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using Microsoft.Office.Interop.Word;
 
 namespace BugReproduction
@@ -6,34 +7,28 @@ namespace BugReproduction
     public class TestButton
     {
         private Document document;
+        private System.Windows.Forms.Timer timer;
 
         private bool SetDocumentToReadOnlyImmediatlyAfterOpening = true; // When you set this to false, then the bug will not happen
         private bool UseTimer = true; // When the timer is not used, then the bug will not happen
 
         public void Run()
         {
-            OpenDocument(Globals.BugReproductionAddIn.Application);
-        }
-
-        void OpenDocument(Application application)
-        {
-            document = application.Documents.Add();
+            document = Globals.BugReproductionAddIn.Application.ActiveDocument;
 
             if (SetDocumentToReadOnlyImmediatlyAfterOpening)
             {
                 document.SetReadOnly(true);
             }
 
-            ResetDocumentAndLoadContentAfterSomeTime();
+            WaitAndLoadContent();
         }
 
-        void ResetDocumentAndLoadContentAfterSomeTime()
+        void WaitAndLoadContent()
         {
-            ResetDocument();
-
             if (UseTimer)
             {
-                var timer = new System.Windows.Forms.Timer();
+                timer = new System.Windows.Forms.Timer();
                 timer.Tick += timer_Tick;
                 timer.Interval = 1000;
                 timer.Start();
@@ -46,23 +41,21 @@ namespace BugReproduction
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            document.SetReadOnly(false);
-            document.AddContent(); // EXCEPTION HAPPENS HERE
-        }
-
-        void ResetDocument()
-        {
-            var isReadOnly = document.IsReadOnly();
-            if (isReadOnly)
+            timer.Stop();
+            try
             {
                 document.SetReadOnly(false);
+                var res = MessageBox.Show($"Document ProtectionType: {document.ProtectionType}\nWill now try to add content.", "Office bug", MessageBoxButton.OKCancel);
+                if (res == MessageBoxResult.Cancel)
+                {
+                    return;
+                }
+
+                document.AddContent(); // EXCEPTION HAPPENS HERE
             }
-
-            document.Content.Delete();
-
-            if (isReadOnly)
+            finally
             {
-                document.SetReadOnly(true);
+                timer.Start();
             }
         }
     }
